@@ -8,6 +8,21 @@ let taskList = [
   "Brush teeth",
 ];
 
+let sessionList = [
+  {
+    id: 1,
+    date: "",
+    totalTimeElapsed: 1259,
+    totalTimeComparisonPercent: "",
+    tasks: [
+      {
+        taskName: "Run",
+        taskTiming: 127,
+      },
+    ],
+  },
+];
+
 let taskTimer = 0;
 let totalTimer = 0;
 
@@ -44,9 +59,13 @@ let isTimerRunning = false;
 
 let interval = 0;
 
+let currentTime = 0;
+
 function startTimer() {
+  // Check to see if the list has been run through
   if (counter < taskList.length) {
-    totalTimer = totalTimer += taskTimer;
+    // Counter is less than the number of tasks
+    totalTimer += taskTimer;
     taskTimer = 0;
     timerEl.innerHTML = "0:0:0s";
     totalTimerEl.innerHTML = convertSecondsStringToTimestamp(totalTimer);
@@ -63,7 +82,8 @@ function startTimer() {
       console.log(counter);
     }
   } else {
-    totalTimer = totalTimer += taskTimer;
+    // Counter is greater than or equal to the number of tasks (stop)
+    totalTimer += taskTimer;
     totalTimerEl.innerHTML = convertSecondsStringToTimestamp(totalTimer);
     clearInterval(interval);
     console.log(`Finito! Counter count: ${counter}`);
