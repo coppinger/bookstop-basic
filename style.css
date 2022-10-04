@@ -17,7 +17,7 @@ h1
     @apply font-bold text-4xl;
 }
 
-.task-list > p, .current-task-x-of-y-holder > p, .current-task-name
+.task-list > p, .current-task-x-of-y-holder > p, .current-task-name, .all-times > p, .finished > p
 {
     @apply text-2xl;
 }

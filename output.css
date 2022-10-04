@@ -594,6 +594,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .flex {
   display: flex;
 }
@@ -656,6 +660,15 @@ video {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-7xl {
   font-size: 4.5rem;
   line-height: 1;
@@ -690,7 +703,7 @@ h1 {
   font-weight: 700;
 }
 
-.task-list > p,  .current-task-x-of-y-holder > p,  .current-task-name {
+.task-list > p,  .current-task-x-of-y-holder > p,  .current-task-name,  .all-times > p,  .finished > p {
   font-size: 1.5rem;
   line-height: 2rem;
 }
