@@ -11,8 +11,8 @@
     <div class="container">
       <h1 class="mb-4">On-going</h1>
       <div class="flex flex-col gap-4 h-full justify-center">
-        <p class="current-task-name">Task Name</p>
-        <p class="current-task-time text-7xl font-bold">X:XX</p>
+        <p class="current-task-name"></p>
+        <p class="current-task-time text-7xl font-bold">0</p>
         <div class="current-task-x-of-y-holder flex gap-2">
           <p class="current-task-x">X</p>
           <p>of</p>
@@ -20,7 +20,9 @@
         </div>
       </div>
     </div>
-    <button class="button" href="./on-going.html">Next</button>
+    <button class="button" href="./on-going.html" onclick="nextTask()">
+      Next
+    </button>
     <script src="./index.js"></script>
   </body>
 </html>

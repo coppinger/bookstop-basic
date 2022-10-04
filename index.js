@@ -16,8 +16,11 @@ let currentTaskNameElem = document.querySelector(".current-task-name");
 let currentTaskNameTime = document.querySelector(".current-task-time");
 let currentTaskXElem = document.querySelector(".current-task-x");
 let currentTaskYElem = document.querySelector(".current-task-y");
+let buttonElem = document.querySelector(".button");
 
 let counter = 0;
+
+let totalTime = 0;
 
 // Update current task elements
 function updateCurrentTaskElements() {
@@ -44,16 +47,36 @@ function startRoutine() {
 
 // Next task function
 
-// -- Add previous task time to total time counter
-// -- Add previous task time to taskLog object
-// -- Reset current time
+function nextTask() {
+  // -- Add previous task time to total time counter
+  // -- Add previous task time to taskLog object
+  // -- Reset current time
 
-// -- Check if this is the second to last task
-// ---- If it is, hide the next button and show the finish button
-// ---- If it isn't, continue as normal
+  // -- CLEAN THIS UP!
+  totalTime += Math.floor((Date.now() - currentTime) / 1000);
+  console.log(totalTime);
+  currentTime = Date.now();
+  currentTaskNameTime.innerHTML = 0;
+  // -- CLEAN THIS UP! ^
 
-// -- Update current task name element
-// -- Update current task time element
+  // -- Check if this is the last task
+  if (counter < taskList.length - 2) {
+    counter++;
+    console.log(counter);
+  } else if (counter == taskList.length - 2) {
+    counter++;
+    buttonElem.innerHTML = "Finish";
+  } else {
+    console.log("Finito!");
+    return;
+  }
+  // ---- If it is, change the next button text to 'Finish' and run the finish function
+  // ---- If it isn't, continue as normal
+
+  // -- Update current task name element
+  // -- Update current task time element
+  updateCurrentTaskElements();
+}
 
 // Finish task function
 
