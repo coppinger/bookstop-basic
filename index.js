@@ -34,8 +34,9 @@ let currentTime = Date.now();
 
 // Update the current task time every second
 function updateCurrentTaskTime() {
-  let secondsElapsed = Math.floor((Date.now() - currentTime) / 1000);
+  let secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
   currentTaskNameTime.innerHTML = secondsElapsed;
+  console.log("Tick");
 }
 
 // Start button clicked, begin session
@@ -51,6 +52,13 @@ function nextTask() {
   // -- Add previous task time to total time counter
   // -- Add previous task time to taskLog object
   // -- Reset current time
+  window.localStorage.setItem(
+    taskList[counter],
+    Math.floor((Date.now() - currentTime) / 1000)
+  );
+  console.log("Local storage thing:");
+  console.log(window.localStorage.getItem(taskList[counter]));
+  console.log("end");
 
   // -- CLEAN THIS UP!
   totalTime += Math.floor((Date.now() - currentTime) / 1000);
@@ -104,6 +112,14 @@ function onPageLoad() {
   if (currentPath === "/finished.html") {
     document.querySelector(".time-elapsed").innerHTML =
       window.localStorage.getItem("totalTime");
+
+    let allTimesElem = document.querySelector(".all-times");
+
+    // Render the times to the page
+    for (let i = 0; i < taskList.length; i++) {
+      allTimesElem.appendChild(document.createElement("p")).innerHTML =
+        taskList[i] + " — " + window.localStorage.getItem(taskList[i]);
+    }
   }
 }
 
