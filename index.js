@@ -68,6 +68,12 @@ function nextTask() {
     buttonElem.innerHTML = "Finish";
   } else {
     console.log("Finito!");
+    // Clear the interval
+    clearInterval(interval);
+    // Set the total time to storage
+    window.localStorage.setItem("totalTime", totalTime);
+    // Redirect to /finished.html
+    window.location.href = "./finished.html";
     return;
   }
   // ---- If it is, change the next button text to 'Finish' and run the finish function
@@ -95,6 +101,12 @@ function onPageLoad() {
   if (currentPath === "/on-going.html") {
     startRoutine();
   }
+  if (currentPath === "/finished.html") {
+    document.querySelector(".time-elapsed").innerHTML =
+      window.localStorage.getItem("totalTime");
+  }
 }
 
 window.addEventListener("load", onPageLoad, false);
+
+// ** MOVE THIS TO FINISHED.JS **
