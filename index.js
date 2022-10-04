@@ -13,11 +13,11 @@ let sessionList = [
     id: 1,
     date: "",
     totalTimeElapsed: 1259,
-    totalTimeComparisonPercent: "",
+    totalTimeComparisonPercent: 0,
     tasks: [
       {
         taskName: "Run",
-        taskTiming: 127,
+        taskTime: 127,
       },
     ],
   },
@@ -65,17 +65,21 @@ function startTimer() {
   // Check to see if the list has been run through
   if (counter < taskList.length) {
     // Counter is less than the number of tasks
+    currentTime = Date.now();
     totalTimer += taskTimer;
     taskTimer = 0;
     timerEl.innerHTML = "0:0:0s";
     totalTimerEl.innerHTML = convertSecondsStringToTimestamp(totalTimer);
     if (isTimerRunning) {
       // Set current task string to the corresponding item in the array
+      totalTimer += (Date.now() - currentTime) / 1000;
       currentTaskEl.innerHTML = taskList[counter];
       counter++;
       console.log(counter);
     } else {
+      totalTimer += (Date.now() - currentTime) / 1000;
       isTimerRunning = true;
+      currentTime = Date.now();
       currentTaskEl.innerHTML = taskList[counter];
       interval = setInterval(timerIncrement, 1000);
       counter++;
