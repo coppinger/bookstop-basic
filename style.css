@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+h1
+{
+    @apply font-bold text-4xl;
+}
+
+body
+{
+    @apply bg-black flex flex-col gap-8 justify-center content-between text-white p-8 font-inter h-screen;
+}
+
+.task-list > p, .current-task-x-of-y-holder > p, .current-task-name
+{
+    @apply text-2xl;
+}
+
+.button
+{
+    @apply rounded-full bg-white text-black py-4 w-full text-2xl font-bold block text-center;
+}
+
+.container
+{
+    /* @apply border border-white mx-auto h-auto p-8 flex flex-col gap-8 rounded-lg; */
+    @apply max-w-sm h-full;
+}

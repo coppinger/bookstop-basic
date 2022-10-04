@@ -6,40 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bookstop v0.1</title>
     <link rel="stylesheet" href="./output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body
-    class="bg-black flex flex-col gap-8 justify-center align-middle text-white p-4"
-  >
-    <div
-      class="border border-white mx-auto h-auto p-8 flex flex-col gap-8 rounded-lg"
-    >
-      <div class="task-list flex flex-col gap-2"></div>
-      <button
-        onclick="startTimer()"
-        class="border border-white p-4 py-2 rounded-lg"
-      >
-        Start
-      </button>
+  <body>
+    <div class="container">
+      <h1 class="mb-4">Tasks</h1>
+      <div class="task-list flex flex-col gap-4"></div>
     </div>
-    <div
-      class="border border-white mx-auto h-auto p-8 flex flex-col gap-8 rounded-lg text-center"
-    >
-      <div class="flex gap-2">
-        <p>Current task:</p>
-        <p class="current-task"></p>
-      </div>
-      <div class="flex gap-2">
-        <p>Total time:</p>
-        <p class="total-timer">0</p>
-      </div>
-      <p class="timer">0</p>
-      <button
-        onclick="startTimer()"
-        class="border border-white p-4 py-2 rounded-lg"
-      >
-        Next task
-      </button>
-    </div>
+    <a class="button" href="./on-going.html">Start</a>
     <script src="./index.js"></script>
   </body>
 </html>

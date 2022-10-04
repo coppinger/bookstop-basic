@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstop v0.1</title>
+    <link rel="stylesheet" href="./output.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="task-list flex flex-col gap-2"></div>
+      <a
+        onclick="startTimer()"
+        class="border border-white p-4 py-2 rounded-lg"
+        href="./on-going.html"
+      >
+        Start
+      </a>
+    </div>
+    <div
+      class="border border-white mx-auto h-auto p-8 flex flex-col gap-8 rounded-lg text-center"
+    >
+      <div class="flex gap-2">
+        <p>Current task:</p>
+        <p class="current-task"></p>
+      </div>
+      <div class="flex gap-2">
+        <p>Total time:</p>
+        <p class="total-timer">0</p>
+      </div>
+      <p class="timer">0</p>
+      <button
+        onclick="startTimer()"
+        class="border border-white p-4 py-2 rounded-lg"
+      >
+        Next task
+      </button>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
