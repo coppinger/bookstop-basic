@@ -22,6 +22,15 @@ let counter = 0;
 
 let totalTime = 0;
 
+// Chronofuction B)
+
+function chronoFunction(secs) {
+  let seconds = secs % 60;
+  let minutes = Math.floor(secs / 60);
+  let hours = Math.floor(minutes / 60);
+  return `${hours}h : ${minutes}m : ${seconds}s`;
+}
+
 // Update current task elements
 function updateCurrentTaskElements() {
   currentTaskNameElem.innerHTML = taskList[counter];
@@ -36,7 +45,6 @@ let currentTime = Date.now();
 function updateCurrentTaskTime() {
   let secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
   currentTaskNameTime.innerHTML = secondsElapsed;
-  console.log("Tick");
 }
 
 // Start button clicked, begin session
@@ -110,19 +118,20 @@ function onPageLoad() {
     startRoutine();
   }
   if (currentPath === "/finished.html") {
-    document.querySelector(".time-elapsed").innerHTML =
-      window.localStorage.getItem("totalTime");
+    document.querySelector(".time-elapsed").innerHTML = chronoFunction(
+      window.localStorage.getItem("totalTime")
+    );
 
     let allTimesElem = document.querySelector(".all-times");
 
     // Render the times to the page
     for (let i = 0; i < taskList.length; i++) {
       allTimesElem.appendChild(document.createElement("p")).innerHTML =
-        taskList[i] + " — " + window.localStorage.getItem(taskList[i]);
+        taskList[i] +
+        " — " +
+        chronoFunction(window.localStorage.getItem(taskList[i]));
     }
   }
 }
 
 window.addEventListener("load", onPageLoad, false);
-
-// ** MOVE THIS TO FINISHED.JS **
