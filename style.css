@@ -2,14 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-h1
-{
-    @apply font-bold text-4xl;
+html {
+    height: fill-available;
+    height: -webkit-fill-available;
 }
 
 body
 {
-    @apply bg-black flex flex-col gap-8 justify-center content-between text-white p-8 font-inter h-screen;
+    @apply bg-black flex flex-col gap-8 justify-center content-between text-white p-8 font-inter h-screen ;
+    min-height: 100vh;
+    min-height: fill-available;
+    min-height: -webkit-fill-available;
+}
+
+h1
+{
+    @apply font-bold text-4xl;
 }
 
 .task-list > p, .current-task-x-of-y-holder > p, .current-task-name
