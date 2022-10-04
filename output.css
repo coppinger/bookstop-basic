@@ -666,14 +666,12 @@ video {
 }
 
 html {
-  height: -moz-available;
-  height: fill-available;
-  height: -webkit-fill-available;
+  height: 100%;
 }
 
 body {
   display: flex;
-  height: 100vh;
+  height: 100%;
   flex-direction: column;
   align-content: space-between;
   justify-content: center;
@@ -684,10 +682,6 @@ body {
   font-family: Inter, sans-serif;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-  min-height: 100vh;
-  min-height: -moz-available;
-  min-height: fill-available;
-  min-height: -webkit-fill-available;
 }
 
 h1 {
