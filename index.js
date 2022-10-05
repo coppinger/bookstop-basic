@@ -31,7 +31,12 @@ function chronoFunction(secs) {
   return `${hours}h : ${minutes}m : ${seconds}s`;
 }
 
-// Update current task elements
+// Convert ms values to seconds
+function convertMillisecondsToSeconds(milliseconds) {
+  return Math.floor((Date.now() - milliseconds) / 1000);
+}
+
+// Update function convertMillisecondsToSeconds(milliseconds){;
 function updateCurrentTaskElements() {
   currentTaskNameElem.innerHTML = taskList[counter];
   currentTaskXElem.innerHTML = counter + 1;
@@ -60,16 +65,15 @@ function nextTask() {
   // -- Add previous task time to total time counter
   // -- Add previous task time to taskLog object
   // -- Reset current time
+
+  // Set current time to local storage item
   window.localStorage.setItem(
     taskList[counter],
-    Math.floor((Date.now() - currentTime) / 1000)
+    convertMillisecondsToSeconds(currentTime)
   );
-  console.log("Local storage thing:");
-  console.log(window.localStorage.getItem(taskList[counter]));
-  console.log("end");
 
   // -- CLEAN THIS UP!
-  totalTime += Math.floor((Date.now() - currentTime) / 1000);
+  totalTime += convertMillisecondsToSeconds(currentTime);
   console.log(totalTime);
   currentTime = Date.now();
   currentTaskNameTime.innerHTML = 0;
