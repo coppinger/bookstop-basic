@@ -1,3 +1,8 @@
+import { percentDiffCalc } from "./mathsFunctions.js";
+import { routineLogItem } from "./objectFunctions.js";
+
+console.log(percentDiffCalc(174.98, 143.18));
+
 let currentPath = window.location.pathname;
 
 let taskList = [
@@ -10,24 +15,24 @@ let taskList = [
   "Brush teeth",
 ];
 
-// let taskListLength = taskList.length;
+let routineLogList = [];
 
-let currentTaskNameElem = document.querySelector(".current-task-name");
-let currentTaskNameTime = document.querySelector(".current-task-time");
-let currentTaskXElem = document.querySelector(".current-task-x");
-let currentTaskYElem = document.querySelector(".current-task-y");
-let buttonElem = document.querySelector(".button");
+const currentTaskNameElem = document.querySelector(".current-task-name");
+const currentTaskNameTime = document.querySelector(".current-task-time");
+const currentTaskXElem = document.querySelector(".current-task-x");
+const currentTaskYElem = document.querySelector(".current-task-y");
+const buttonElem = document.querySelector(".button");
 
 let counter = 0;
 
-let totalTime = 0;
+let totalTime = 80598;
 
-// Chronofuction B)
+// Convert seconds to a timestamp (6006s -> 10m : 6s)
 
-function chronoFunction(secs) {
-  let seconds = secs % 60;
-  let minutes = Math.floor(secs / 60);
-  let hours = Math.floor(minutes / 60);
+function convertSecondsToTimestamp(secs) {
+  const seconds = secs % 60;
+  const minutes = Math.floor(secs / 60) % 60;
+  const hours = Math.floor(secs / 60 / 60);
   return `${hours}h : ${minutes}m : ${seconds}s`;
 }
 
@@ -48,7 +53,8 @@ let currentTime = Date.now();
 
 // Update the current task time every second
 function updateCurrentTaskTime() {
-  let secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
+  // Refactor this so it isn't using ceil
+  const secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
   currentTaskNameTime.innerHTML = secondsElapsed;
 }
 
@@ -72,12 +78,12 @@ function nextTask() {
     convertMillisecondsToSeconds(currentTime)
   );
 
-  // -- CLEAN THIS UP!
+  // Add the task which is ending's time to the totalTime variable
   totalTime += convertMillisecondsToSeconds(currentTime);
-  console.log(totalTime);
+  // Reset the currentTime variable to the time in this moment
   currentTime = Date.now();
+  // Reset the task name time element to 0
   currentTaskNameTime.innerHTML = 0;
-  // -- CLEAN THIS UP! ^
 
   // -- Check if this is the last task
   if (counter < taskList.length - 2) {
@@ -122,9 +128,8 @@ function onPageLoad() {
     startRoutine();
   }
   if (currentPath === "/finished.html") {
-    document.querySelector(".time-elapsed").innerHTML = chronoFunction(
-      window.localStorage.getItem("totalTime")
-    );
+    document.querySelector(".time-elapsed").innerHTML =
+      convertSecondsToTimestamp(window.localStorage.getItem("totalTime"));
 
     let allTimesElem = document.querySelector(".all-times");
 
@@ -133,9 +138,13 @@ function onPageLoad() {
       allTimesElem.appendChild(document.createElement("p")).innerHTML =
         taskList[i] +
         " — " +
-        chronoFunction(window.localStorage.getItem(taskList[i]));
+        convertSecondsToTimestamp(window.localStorage.getItem(taskList[i]));
     }
   }
 }
 
 window.addEventListener("load", onPageLoad, false);
+
+routineLogList.push(new routineLogItem(taskList[0]));
+
+console.log(routineLogList);
