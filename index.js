@@ -1,7 +1,4 @@
-import { percentDiffCalc } from "./mathsFunctions.js";
 import { routineLogItem } from "./objectFunctions.js";
-
-console.log(percentDiffCalc(174.98, 143.18));
 
 let currentPath = window.location.pathname;
 
@@ -25,7 +22,7 @@ const buttonElem = document.querySelector(".button");
 
 let counter = 0;
 
-let totalTime = 80598;
+let totalTime = 5000;
 
 // Convert seconds to a timestamp (6006s -> 10m : 6s)
 
@@ -146,5 +143,16 @@ function onPageLoad() {
 window.addEventListener("load", onPageLoad, false);
 
 routineLogList.push(new routineLogItem(taskList[0]));
+
+routineLogList[0].updateTotalTimeElapsed(10000);
+
+routineLogList.push(new routineLogItem(taskList[0]));
+
+// routineLogList[1].updateTotalTimeElapsed(totalTime);
+
+routineLogList[routineLogList.length - 1].updateTotalTimeComparisonPercent(
+  routineLogList,
+  totalTime
+);
 
 console.log(routineLogList);

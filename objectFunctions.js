@@ -1,3 +1,5 @@
+import { percentDiffCalc } from "./mathsFunctions.js";
+
 // 0. Create a class for the object
 
 export class routineLogItem {
@@ -13,20 +15,23 @@ export class routineLogItem {
   addTask(taskName) {
     this.tasks.push({ taskName: taskName });
   }
-  // -- 1. Update totalTimeElapsed
 
-  updateTotalTimeElapsed() {
+  // -- 1. Update totalTimeElapsed
+  updateTotalTimeElapsed(totalTime) {
     this.totalTimeElapsed = totalTime;
   }
 
   // -- 2. Calculate total totalTimeComparisonPercent
-  updateTotalTimeComparisonPercent() {
+  updateTotalTimeComparisonPercent(routineLogList, totalTime) {
     // This updates the totalTimeComparisonPercent value of this object to a calculation
     // using the percentDiffCalc function to calculate the % difference. Noice.
-    this.totalTimeComparisonPercent(
-      percentDiffCalc(taskList[taskList.length - 1].totalTimeElapsed, totalTime)
+    this.totalTimeComparisonPercent = percentDiffCalc(
+      routineLogList[routineLogList.length - 2].totalTimeElapsed,
+      totalTime
     );
   }
+
+  // TODO: Save a finish time
 }
 
 // 1. Add the first task to the array (rotuineLogList)
