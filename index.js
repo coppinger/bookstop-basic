@@ -1,4 +1,4 @@
-import { routineLogItem } from "./objectFunctions.js";
+import { routineLog } from "./objectFunctions.js";
 
 let currentPath = window.location.pathname;
 
@@ -142,11 +142,11 @@ function onPageLoad() {
 
 window.addEventListener("load", onPageLoad, false);
 
-routineLogList.push(new routineLogItem(taskList[0]));
+routineLogList.push(new routineLog(taskList[0]));
 
 routineLogList[0].updateTotalTimeElapsed(10000);
 
-routineLogList.push(new routineLogItem(taskList[0]));
+routineLogList.push(new routineLog(taskList[0]));
 
 // routineLogList[1].updateTotalTimeElapsed(totalTime);
 
@@ -154,5 +154,11 @@ routineLogList[routineLogList.length - 1].updateTotalTimeComparisonPercent(
   routineLogList,
   totalTime
 );
+
+routineLogList[0].addTask("test task", totalTime);
+
+routineLogList[0].finishTask();
+
+routineLogList[0].saveFinishTime();
 
 console.log(routineLogList);
