@@ -50,13 +50,13 @@ export class routineLog {
 
   finishTask() {
     let thisTask = this.tasks.length - 1;
-    let t = this.tasks;
+    let tasksArray = this.tasks;
 
-    t[thisTask].taskEndDate = new Date();
+    tasksArray[thisTask].taskEndDate = new Date();
 
-    t[thisTask].taskDuration =
-      (t[thisTask].taskEndDate.getTime() -
-        t[thisTask].taskStartDate.getTime()) /
+    tasksArray[thisTask].taskDuration =
+      (tasksArray[thisTask].taskEndDate.getTime() -
+        tasksArray[thisTask].taskStartDate.getTime()) /
       1000;
   }
 

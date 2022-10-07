@@ -55,6 +55,8 @@ function updateCurrentTaskTime() {
   currentTaskNameTime.innerHTML = secondsElapsed;
 }
 
+let interval = "";
+
 // Start button clicked, begin session
 function startRoutine() {
   updateCurrentTaskElements();
@@ -122,6 +124,7 @@ function onPageLoad() {
   }
   // -- If on the on-going page, load the start function
   if (currentPath === "/on-going.html") {
+    buttonElem.addEventListener("click", nextTask);
     startRoutine();
   }
   if (currentPath === "/finished.html") {
@@ -162,3 +165,5 @@ routineLogList[0].finishTask();
 routineLogList[0].saveFinishTime();
 
 console.log(routineLogList);
+
+window.nextTask = nextTask;
