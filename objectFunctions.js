@@ -38,6 +38,7 @@ export class routineLog {
   // -- saveFinishTime
   // ## Task methods
   // -- Finish task — save the current time to the taskFinishDate
+  // --
 
   // -- Create methods
   // -- 0. Add new task
@@ -66,13 +67,33 @@ export class routineLog {
   }
 
   // -- 2. Calculate total totalTimeComparisonPercent
-  updateTotalTimeComparisonPercent(routineLogList, totalTime) {
-    // This updates the totalTimeComparisonPercent value of this object to a calculation
-    // using the percentDiffCalc function to calculate the % difference. Noice.
-    this.totalTimeComparisonPercent = percentDiffCalc(
-      routineLogList[routineLogList.length - 2].totalTimeElapsed,
-      totalTime
-    );
+  setPercentChange(routineLogList) {
+    // // This updates the totalTimeComparisonPercent value of this object to a calculation
+    // // using the percentDiffCalc function to calculate the % difference. Noice.
+    // this.totalTimeComparisonPercent = percentDiffCalc(
+    //   routineLogList[routineLogList.length - 2].totalTimeElapsed,
+    //   totalTime
+    // );
+
+    // // property == routineLog[routineLog.length - 1]
+    // // OR
+    // // property == routineLog[routineLog.length - 1].tasks
+
+    // // Refactor
+    // this.property = percentDiffCalc(
+    //   routineLogList[routineLogList.length - 2].totalTimeElapsed,
+    //   routineLogList[routineLogList.length - 1].totalTimeElapsed
+    // );
+
+    // this.property = percentDiffCalc(
+    //   this.tasks[this.tasks.length - 2].taskDuration,
+    //   this.tasks[this.tasks.length - 1].taskDuration
+    // );
+
+    console.log("!!!");
+    console.log(routineLogList.length);
+    console.log(this.tasks.length);
+    console.log("!!!");
   }
 
   // TODO: Save a finish time
