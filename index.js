@@ -12,6 +12,20 @@ let taskList = [
 
 let routineLogList = [];
 
+if (localStorage.getItem("routineLogList") !== null) {
+  routineLogList = JSON.parse(localStorage.getItem("routineLogList"));
+}
+
+// localStorage.setItem("routineLogList", "yeet");
+
+// localStorage.removeItem("routineLogList");
+
+// routineLogList = localStorage.getItem("routineLogList") || [];
+
+// if (localStorage.getItem("routineLogList") !== null) {
+//   routineLogList = localStorage.getItem("routineLogList);
+// }
+
 const currentTaskNameElem = document.querySelector(".current-task-name");
 const currentTaskNameTime = document.querySelector(".current-task-time");
 const currentTaskXElem = document.querySelector(".current-task-x");
@@ -102,6 +116,13 @@ function nextTask() {
     clearInterval(interval);
     // Set the total time to storage
     window.localStorage.setItem("totalTime", totalTime);
+    // Add the finish time to the log
+    routineLogList[routineLogList.length - 1].saveFinishTime();
+    // Set the routineLog to storage
+    window.localStorage.setItem(
+      "routineLogList",
+      JSON.stringify(routineLogList)
+    );
     // Redirect to /finished.html
     window.location.href = "./finished.html";
     return;
@@ -116,7 +137,66 @@ function nextTask() {
 
 // Finish task function
 
-// *-- ON PAGE LOAD --*
+/**------------------------------------------------------------------------
+ *                           FINISHED PAGE
+ *------------------------------------------------------------------------**/
+
+function finishedRender() {
+  const currentRoutineLog = routineLogList[routineLogList.length - 1];
+  const prevRoutineLog = routineLogList[routineLogList.length - 2];
+
+  /*------------------ DIVISION -----------------*/
+
+  const logDayElem = document.querySelector(".log-day");
+  const logDateElem = document.querySelector(".log-date");
+  const logMonthElem = document.querySelector(".log-month");
+  const logYearElem = document.querySelector(".log-year");
+
+  logDayElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    weekday: "long",
+  }).format(new Date(currentRoutineLog.finishTime));
+
+  logDateElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    day: "numeric",
+  }).format(new Date(currentRoutineLog.finishTime));
+
+  logMonthElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    month: "short",
+  }).format(new Date(currentRoutineLog.finishTime));
+
+  logYearElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    year: "numeric",
+  }).format(new Date(currentRoutineLog.finishTime));
+
+  /*------------------ DIVISION -----------------*/
+
+  let startTimeElem = document.querySelector(".start-time");
+  let endTimeElem = document.querySelector(".end-time");
+
+  startTimeElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    timeStyle: "short",
+  }).format(new Date(currentRoutineLog.startTime));
+
+  endTimeElem.innerHTML = new Intl.DateTimeFormat("en-local", {
+    timeStyle: "short",
+  }).format(new Date(currentRoutineLog.finishTime));
+
+  /*------------------ DIVISION -----------------*/
+
+  let totalDuration = document.querySelector(".total-duration");
+  let previousDuration = document.querySelector(".previous-duration");
+
+  totalDuration.innerHTML = currentRoutineLog.totalTimeElapsed;
+
+  previousDuration.innerHTML = prevRoutineLog.totalTimeElapsed;
+
+  // previousDuration.innerHTML =
+  //   JSON.parse(routineLogList)[routineLogList.length - 2].totalTimeElapsed;
+}
+
+/**------------------------------------------------------------------------
+ *                           ON PAGE LOAD
+ *------------------------------------------------------------------------**/
 
 // Render the relevant items on the page
 function onPageLoad() {
@@ -130,21 +210,21 @@ function onPageLoad() {
   // -- If on the on-going page, load the start function
   if (currentPath === "/on-going.html") {
     buttonElem.addEventListener("click", nextTask);
+    routineLogList.push(new routineLog(taskList[0]));
     startRoutine();
   }
   if (currentPath === "/finished.html") {
-    document.querySelector(".time-elapsed").innerHTML =
-      convertSecondsToTimestamp(window.localStorage.getItem("totalTime"));
-
-    let allTimesElem = document.querySelector(".all-times");
-
+    // document.querySelector(".time-elapsed").innerHTML =
+    //   convertSecondsToTimestamp(window.localStorage.getItem("totalTime"));
+    // let allTimesElem = document.querySelector(".all-times");
     // Render the times to the page
-    for (let i = 0; i < taskList.length; i++) {
-      allTimesElem.appendChild(document.createElement("p")).innerHTML =
-        taskList[i] +
-        " — " +
-        convertSecondsToTimestamp(window.localStorage.getItem(taskList[i]));
-    }
+    // for (let i = 0; i < taskList.length; i++) {
+    //   allTimesElem.appendChild(document.createElement("p")).innerHTML =
+    //     taskList[i] +
+    //     " — " +
+    //     convertSecondsToTimestamp(window.localStorage.getItem(taskList[i]));
+    // }
+    finishedRender();
   }
 }
 
@@ -223,9 +303,10 @@ export class routineLog {
       1000;
   }
 
-  // -- 1. Update totalTimeElapsed
-  updateTotalTimeElapsed(totalTime) {
-    this.totalTimeElapsed = totalTime;
+  saveFinishTime() {
+    this.finishTime = new Date();
+    this.totalTimeElapsed =
+      (this.finishTime.getTime() - this.startTime.getTime()) / 1000;
   }
 
   // -- 2. Calculate total totalTimeComparisonPercent
@@ -263,11 +344,6 @@ export class routineLog {
   //   console.log(this.tasks.length);
   //   console.log("!!!");
   // }
-
-  // TODO: Save a finish time
-  saveFinishTime() {
-    this.finishTime = new Date();
-  }
 }
 
 // 1. Add the first task to the array (rotuineLogList)
@@ -285,9 +361,10 @@ export class routineLog {
 
 window.addEventListener("load", onPageLoad, false);
 
-routineLogList.push(new routineLog(taskList[0]));
+// routineLogList[1].finishTime = new Date();
 
-routineLogList.push(new routineLog(taskList[0]));
+// routineLogList[0].saveFinishTime();
+// routineLogList[1].saveFinishTime();
 
 console.log(routineLogList);
-console.log(routineLogList[1].tasks);
+// console.log(routineLogList[1].tasks);

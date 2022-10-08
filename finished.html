@@ -9,15 +9,69 @@
     />
     <title>Bookstop v0.1</title>
     <link rel="stylesheet" href="./output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
-      <div class="finished flex gap-4 mb-8">
-        <p>Total time:</p>
-        <p class="time-elapsed"></p>
+      <h1 class="mb-4">Finished</h1>
+      <div class="finished flex flex-col gap-8 h-full justify-center">
+        <div class="flex flex-col gap-4">
+          <div class="flex gap-2">
+            <p class="log-day font-bold">Wednesday</p>
+            <p class="log-date">7th</p>
+            <p class="log-month">Sep</p>
+            <p class="log-year">2022</p>
+          </div>
+          <div class="flex gap-4 items-center">
+            <p class="start-time">10:47am</p>
+            <p>-></p>
+            <p class="end-time">12:37pm</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h2 class="total-duration font-bold text-5xl">2h 23m 11s</h2>
+          <div class="flex gap-2 text-gray-500">
+            <p>Previous:</p>
+            <p class="previous-duration">2h 54m 59s</p>
+          </div>
+          <div class="flex">
+            <h2 class="percent-change text-4xl text-green-500 font-bold">19</h2>
+            <h2 class="text-4xl text-green-500 font-bold">% faster</h2>
+          </div>
+        </div>
+        <ul class="flex flex-col gap-4">
+          <li class="flex justify-between">
+            <p class="">Run</p>
+            <p class="text-green-500">50%</p>
+            <p class="">1h 17m 3s</p>
+          </li>
+          <li class="flex justify-between">
+            <p class="">Workout</p>
+            <p class="text-red-500">17%</p>
+            <p class="">15m 7s</p>
+          </li>
+          <li class="flex justify-between">
+            <p class="">Cold shower</p>
+            <p class="text-green-500">6%</p>
+            <p class="">5m 6s</p>
+          </li>
+          <li class="flex justify-between">
+            <p class="">Dress</p>
+            <p class="text-green-500">18%</p>
+            <p class="">48s</p>
+          </li>
+          <li class="flex justify-between">
+            <p>Make bed</p>
+            <p class="text-green-500">2%</p>
+            <p>17m 2s</p>
+          </li>
+        </ul>
       </div>
-      <div class="all-times text-right"></div>
     </div>
+    <button class="button" href="./on-going.html">Done</button>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

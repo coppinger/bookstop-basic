@@ -1,0 +1,104 @@
+[
+  {
+    "startTime": "2022-10-08T03:40:31.191Z",
+    "finishTime": "",
+    "tasks": [
+      {
+        "taskName": "Run",
+        "taskStartDate": "2022-10-08T03:40:31.191Z",
+        "taskEndDate": "2022-10-08T03:40:34.638Z",
+        "taskDuration": 3.447
+      },
+      {
+        "taskName": "Workout",
+        "taskStartDate": "2022-10-08T03:40:34.638Z",
+        "taskEndDate": "2022-10-08T03:40:34.949Z",
+        "taskDuration": 0.311
+      },
+      {
+        "taskName": "Shower",
+        "taskStartDate": "2022-10-08T03:40:34.949Z",
+        "taskEndDate": "2022-10-08T03:40:35.140Z",
+        "taskDuration": 0.191
+      },
+      {
+        "taskName": "Dress",
+        "taskStartDate": "2022-10-08T03:40:35.140Z",
+        "taskEndDate": "2022-10-08T03:40:35.316Z",
+        "taskDuration": 0.176
+      },
+      {
+        "taskName": "Make bed",
+        "taskStartDate": "2022-10-08T03:40:35.316Z",
+        "taskEndDate": "2022-10-08T03:40:35.472Z",
+        "taskDuration": 0.156
+      },
+      {
+        "taskName": "Breakfast",
+        "taskStartDate": "2022-10-08T03:40:35.472Z",
+        "taskEndDate": "2022-10-08T03:40:35.791Z",
+        "taskDuration": 0.319
+      },
+      {
+        "taskName": "Brush teeth",
+        "taskStartDate": "2022-10-08T03:40:35.791Z",
+        "taskEndDate": "2022-10-08T03:40:36.033Z",
+        "taskDuration": 0.242
+      },
+      { "taskStartDate": "2022-10-08T03:40:36.033Z" }
+    ],
+    "totalTimeElapsed": 0,
+    "totalTimeComparisonPercent": ""
+  },
+  {
+    "startTime": "2022-10-08T03:48:49.453Z",
+    "finishTime": "2022-10-08T03:48:51.643Z",
+    "tasks": [
+      {
+        "taskName": "Run",
+        "taskStartDate": "2022-10-08T03:48:49.453Z",
+        "taskEndDate": "2022-10-08T03:48:50.257Z",
+        "taskDuration": 0.804
+      },
+      {
+        "taskName": "Workout",
+        "taskStartDate": "2022-10-08T03:48:50.257Z",
+        "taskEndDate": "2022-10-08T03:48:50.591Z",
+        "taskDuration": 0.334
+      },
+      {
+        "taskName": "Shower",
+        "taskStartDate": "2022-10-08T03:48:50.591Z",
+        "taskEndDate": "2022-10-08T03:48:50.780Z",
+        "taskDuration": 0.189
+      },
+      {
+        "taskName": "Dress",
+        "taskStartDate": "2022-10-08T03:48:50.780Z",
+        "taskEndDate": "2022-10-08T03:48:50.930Z",
+        "taskDuration": 0.15
+      },
+      {
+        "taskName": "Make bed",
+        "taskStartDate": "2022-10-08T03:48:50.930Z",
+        "taskEndDate": "2022-10-08T03:48:51.094Z",
+        "taskDuration": 0.164
+      },
+      {
+        "taskName": "Breakfast",
+        "taskStartDate": "2022-10-08T03:48:51.094Z",
+        "taskEndDate": "2022-10-08T03:48:51.275Z",
+        "taskDuration": 0.181
+      },
+      {
+        "taskName": "Brush teeth",
+        "taskStartDate": "2022-10-08T03:48:51.275Z",
+        "taskEndDate": "2022-10-08T03:48:51.643Z",
+        "taskDuration": 0.368
+      },
+      { "taskStartDate": "2022-10-08T03:48:51.643Z" }
+    ],
+    "totalTimeElapsed": 2.19,
+    "totalTimeComparisonPercent": ""
+  }
+]
