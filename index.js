@@ -186,12 +186,23 @@ function finishedRender() {
   let totalDuration = document.querySelector(".total-duration");
   let previousDuration = document.querySelector(".previous-duration");
 
-  totalDuration.innerHTML = currentRoutineLog.totalTimeElapsed;
+  totalDuration.innerHTML = formatTime(currentRoutineLog.totalTimeElapsed);
 
-  previousDuration.innerHTML = prevRoutineLog.totalTimeElapsed;
+  previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
 
   // previousDuration.innerHTML =
   //   JSON.parse(routineLogList)[routineLogList.length - 2].totalTimeElapsed;
+}
+
+// Format time
+
+function formatTime(seconds) {
+  let secs = Math.floor(seconds % 60);
+  let mins = Math.floor((seconds / 60) % 60);
+  let hours = Math.floor(seconds / 60 / 60);
+  return `${hours > 0 ? hours + "h" : ""}
+  ${mins > 0 ? mins + "m" : ""}
+  ${secs > 0 ? secs + "s" : ""}`;
 }
 
 /**------------------------------------------------------------------------
