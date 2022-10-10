@@ -10,11 +10,9 @@ let taskList = [
   "Brush teeth",
 ];
 
-let routineLogList = [];
-
-if (localStorage.getItem("routineLogList") !== null) {
-  routineLogList = JSON.parse(localStorage.getItem("routineLogList"));
-}
+// If there is no routineLogList array saved in local storage, then create it, otherwise load whatever is in local storage
+window.routineLogList =
+  JSON.parse(localStorage.getItem("routineLogList")) || [];
 
 // localStorage.setItem("routineLogList", "yeet");
 
@@ -64,7 +62,7 @@ let currentTime = Date.now();
 function updateCurrentTaskTime() {
   // Refactor this so it isn't using ceil
   const secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
-  currentTaskNameTime.innerHTML = secondsElapsed;
+  currentTaskNameTime.innerHTML = formatTime(secondsElapsed);
 }
 
 let interval = "";
@@ -118,6 +116,8 @@ function nextTask() {
     window.localStorage.setItem("totalTime", totalTime);
     // Add the finish time to the log
     routineLogList[routineLogList.length - 1].saveFinishTime();
+    //! This is shit and I feel shit
+    routineLogList[routineLogList.length - 1].tasks.pop();
     // Set the routineLog to storage
     window.localStorage.setItem(
       "routineLogList",
@@ -190,8 +190,64 @@ function finishedRender() {
 
   previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
 
-  // previousDuration.innerHTML =
-  //   JSON.parse(routineLogList)[routineLogList.length - 2].totalTimeElapsed;
+  /*------------------ DIVISION -----------------*/
+
+  const totalTimeComparisonElem = document.querySelector(".percent-change");
+  const percentChangeHolderElem = document.querySelector(
+    ".percent-change-holder"
+  );
+  const percentChangeDescriptorElem = document.querySelector(
+    ".percent-change-descriptor"
+  );
+
+  totalTimeComparisonElem.innerHTML = Math.abs(
+    currentRoutineLog.totalTimeComparisonPercent
+  );
+
+  currentRoutineLog.totalTimeComparisonPercent > 0
+    ? (percentChangeHolderElem.classList.add("text-green-500"),
+      (percentChangeDescriptorElem.innerHTML = " faster"))
+    : (percentChangeHolderElem.classList.add("text-red-500"),
+      (percentChangeDescriptorElem.innerHTML = "slower"));
+  // percentChangeDescriptorElem
+
+  /*------------------ DIVISION -----------------*/
+
+  const taskHolderElem = document.querySelector(".task-holder");
+
+  for (let i = 0; i < currentRoutineLog.tasks.length; i++) {
+    let li = document.createElement("li");
+    li.classList.add("grid", "justify-between", "grid-cols-[3fr_2fr_2fr]");
+    let p1 = document.createElement("p");
+    p1.innerText = currentRoutineLog.tasks[i].taskName;
+    p1.classList.add(
+      "text-left",
+      "whitespace-nowrap",
+      "text-ellipsis",
+      "min-w-0",
+      "overflow-hidden"
+    );
+    let p2 = document.createElement("p");
+    p2.innerText = Math.abs(currentRoutineLog.tasks[i].taskPercentChange) + "%";
+    p2.classList.add("text-center", "whitespace-nowrap");
+    if (currentRoutineLog.tasks[i].taskPercentChange > 0) {
+      p2.classList.add("text-green-500");
+    } else {
+      p2.classList.add("text-red-500");
+    }
+    let p3 = document.createElement("p");
+    p3.innerText = formatTime(currentRoutineLog.tasks[i].taskDuration);
+    p3.classList.add("text-right");
+    li.appendChild(p1);
+    li.appendChild(p2);
+    li.appendChild(p3);
+    taskHolderElem.appendChild(li);
+  }
+
+  // for (let i = 0; i < taskList.length; i++) {
+  //   taskHolderElem.appendChild(document.createElement("li")).innerHTML = "";
+  //   convertSecondsToTimestamp(window.localStorage.getItem(taskList[i]));
+  // }
 }
 
 // Format time
@@ -200,9 +256,28 @@ function formatTime(seconds) {
   let secs = Math.floor(seconds % 60);
   let mins = Math.floor((seconds / 60) % 60);
   let hours = Math.floor(seconds / 60 / 60);
-  return `${hours > 0 ? hours + "h" : ""}
-  ${mins > 0 ? mins + "m" : ""}
-  ${secs > 0 ? secs + "s" : ""}`;
+  return `${
+    (hours > 0 ? hours + "h" : "",
+    mins > 0 ? mins + "m" : "",
+    secs > 0 ? secs + "s" : "")
+  }`;
+}
+
+// -- At the end of the task, save the time elapsed to the task array
+
+function calcTaskPercentChange() {
+  // Calculate the percent change between this tasks duration, and the previous routine log's task duration for the same task
+  let thisRoutine = routineLogList[routineLogList.length - 1];
+  let prevRoutine = routineLogList[routineLogList.length - 2];
+
+  for (let i = 0; i < thisRoutine.tasks.length; i++) {
+    thisRoutine.tasks[i].taskPercentChange = Math.floor(
+      percentDiffCalc(
+        prevRoutine.tasks[i].taskDuration,
+        thisRoutine.tasks[i].taskDuration
+      )
+    );
+  }
 }
 
 /**------------------------------------------------------------------------
@@ -235,6 +310,13 @@ function onPageLoad() {
     //     " — " +
     //     convertSecondsToTimestamp(window.localStorage.getItem(taskList[i]));
     // }
+    let buttonDoneElem = document.querySelector(".button-done");
+
+    buttonDoneElem.addEventListener("click", () => {
+      window.location.href = "./";
+    });
+
+    calcTaskPercentChange();
     finishedRender();
   }
 }
@@ -243,7 +325,7 @@ function onPageLoad() {
  *                           Maths Functions
  *========================================================================**/
 
-export function percentDiffCalc(oldVal, newVal) {
+function percentDiffCalc(oldVal, newVal) {
   // Calculate the difference in percent between two values
   return ((oldVal - newVal) / oldVal) * 100;
 }
@@ -272,7 +354,7 @@ export function percentDiffCalc(oldVal, newVal) {
   },
 ];
 
-export class routineLog {
+class routineLog {
   // Define what properties the object should have
   constructor(firstTask) {
     this.startTime = new Date();
@@ -291,7 +373,6 @@ export class routineLog {
   // -- saveFinishTime
   // ## Task methods
   // -- Finish task — save the current time to the taskFinishDate
-  // --
 
   // -- Create methods
   // -- 0. Add new task
@@ -300,14 +381,15 @@ export class routineLog {
     // this.tasks[this.tasks.length - 1].taskStartDate = new Date();
   }
 
-  // -- At the end of the task, save the time elapsed to the task array
-
   finishTask() {
     let thisTask = this.tasks.length - 1;
+    let prevRoutineThisTask =
+      routineLogList[routineLogList.length - 2].tasks[this.tasks.length - 1];
     let tasksArray = this.tasks;
 
     tasksArray[thisTask].taskEndDate = new Date();
 
+    // Calculate and set the routines total duration
     tasksArray[thisTask].taskDuration =
       (tasksArray[thisTask].taskEndDate.getTime() -
         tasksArray[thisTask].taskStartDate.getTime()) /
@@ -318,6 +400,15 @@ export class routineLog {
     this.finishTime = new Date();
     this.totalTimeElapsed =
       (this.finishTime.getTime() - this.startTime.getTime()) / 1000;
+
+    // Calculate and set the total percent change vs the most recent routine
+    routineLogList[routineLogList.length - 1].totalTimeComparisonPercent =
+      Math.ceil(
+        percentDiffCalc(
+          routineLogList[routineLogList.length - 2].totalTimeElapsed,
+          routineLogList[routineLogList.length - 1].totalTimeElapsed
+        )
+      );
   }
 
   // -- 2. Calculate total totalTimeComparisonPercent
@@ -372,10 +463,4 @@ export class routineLog {
 
 window.addEventListener("load", onPageLoad, false);
 
-// routineLogList[1].finishTime = new Date();
-
-// routineLogList[0].saveFinishTime();
-// routineLogList[1].saveFinishTime();
-
 console.log(routineLogList);
-// console.log(routineLogList[1].tasks);
