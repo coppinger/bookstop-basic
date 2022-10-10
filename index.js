@@ -326,7 +326,9 @@ if (currentPath === "/") {
   addTaskElem.addEventListener("click", handleAddNewTask);
 
   function handleAddNewTask() {
-    let newTaskName = window.prompt();
+    let newTaskName = window.prompt(
+      "Enter a name for the new task you want to add"
+    );
     taskList.push(newTaskName);
     renderTasks(taskList);
   }
@@ -384,6 +386,10 @@ function onPageLoad() {
     startRoutine();
   }
   if (currentPath === "/finished.html") {
+    let audioFile = new Audio("./it-was-perfect.mp3");
+    audioFile.loop = false;
+    audioFile.play();
+    console.log(audioFile);
     // document.querySelector(".time-elapsed").innerHTML =
     //   convertSecondsToTimestamp(window.localStorage.getItem("totalTime"));
     // let allTimesElem = document.querySelector(".all-times");

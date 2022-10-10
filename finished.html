@@ -48,5 +48,25 @@
     </div>
     <button class="button-done button" href="./on-going.html">Done</button>
     <script src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+      setTimeout(() => {
+        confetti({
+          angle: 150,
+        });
+      }, 250);
+      setTimeout(() => {
+        confetti({
+          angle: 90,
+          particleCount: 300,
+          spread: 150,
+        });
+      }, 690);
+      setTimeout(() => {
+        confetti({
+          angle: 30,
+        });
+      }, 420);
+    </script>
   </body>
 </html>
