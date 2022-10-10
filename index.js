@@ -286,15 +286,33 @@ function calcTaskPercentChange() {
  *                           C.R.U.D (Cash rules uverything, dude)
  *------------------------------------------------------------------------**/
 
+function handleUpdateTask(e) {
+  let updatingTaskName = e.path[1].querySelector(".task-p");
+  let updatedTaskName = window.prompt(
+    `Enter the new task name for '${updatingTaskName.innerText}'`
+  );
+  thisTaskIndexPos = updatingTaskName.id.charAt(updatingTaskName.id.length - 1);
+  taskList[thisTaskIndexPos] = updatedTaskName;
+  renderTasks(taskList);
+}
+
+function handleDeleteTask(e) {
+  console.log(`Before: ${taskList}`);
+  let deleteingTaskId = e.path[1]
+    .querySelector(".task-p")
+    .id.charAt(e.path[1].querySelector(".task-p").id.length - 1);
+  renderTasks(taskList);
+}
+
 if (currentPath === "/") {
-  function createTask(task) {
+  function createTask(task, id) {
     const fragment = document.createElement("li");
 
     fragment.innerHTML = `
     <li class="grid grid-cols-[3fr_1fr_1fr] justify-between gap-2 ">
-      <p class="text-4xl whitespace-nowrap text-ellipsis min-w-0 overflow-hidden">${task}</p>
-      <button class="button-edit-task text-sm font-bold border-2 border-white rounded-full">Edit</button>
-      <button class="button-delete-task text-sm font-bold border-2 border-white rounded-full">Del</button>
+      <p id="task-id-${id}" class="task-p text-2xl whitespace-nowrap text-ellipsis min-w-0 overflow-hidden">${task}</p>
+      <button class="button-edit-task text-sm font-bold border-2 border-white rounded-full" onclick="handleUpdateTask(event)">Edit</button>
+      <button onclick="handleDeleteTask(event)" class="button-delete-task text-sm font-bold border-2 border-white rounded-full">Del</button>
     </li>
   `;
 
@@ -313,14 +331,12 @@ if (currentPath === "/") {
     renderTasks(taskList);
   }
 
-  function handleDeleteTask() {}
-
   const taskListEl = document.querySelector(".task-list");
 
   function renderTasks(array) {
     taskListEl.innerHTML = "";
     for (let i = 0; i < array.length; i++) {
-      taskListEl.appendChild(createTask(array[i]));
+      taskListEl.appendChild(createTask(array[i], [i]));
     }
   }
 }
