@@ -219,7 +219,7 @@ function finishedRender() {
 
   for (let i = 0; i < currentRoutineLog.tasks.length; i++) {
     let li = document.createElement("li");
-    li.classList.add("grid", "justify-between", "grid-cols-[3fr_2fr_2fr]");
+    li.classList.add("grid", "justify-between", "grid-cols-[3fr_1fr_1fr]");
     let p1 = document.createElement("p");
     p1.innerText = currentRoutineLog.tasks[i].taskName;
     p1.classList.add(
@@ -286,10 +286,11 @@ function calcTaskPercentChange() {
  *                           C.R.U.D (Cash rules uverything, dude)
  *------------------------------------------------------------------------**/
 
-function createTask(task) {
-  const fragment = document.createElement("li");
+if (currentPath === "/") {
+  function createTask(task) {
+    const fragment = document.createElement("li");
 
-  fragment.innerHTML = `
+    fragment.innerHTML = `
     <li class="grid grid-cols-[3fr_1fr_1fr] justify-between gap-2 ">
       <p class="text-4xl whitespace-nowrap text-ellipsis min-w-0 overflow-hidden">${task}</p>
       <button class="button-edit-task text-sm font-bold border-2 border-white rounded-full">Edit</button>
@@ -297,29 +298,30 @@ function createTask(task) {
     </li>
   `;
 
-  console.log(fragment.children);
+    console.log(fragment.children);
 
-  return fragment;
-}
+    return fragment;
+  }
 
-const addTaskElem = document.querySelector(".add-task");
+  const addTaskElem = document.querySelector(".add-task");
 
-addTaskElem.addEventListener("click", handleAddNewTask);
+  addTaskElem.addEventListener("click", handleAddNewTask);
 
-function handleAddNewTask() {
-  let newTaskName = window.prompt();
-  taskList.push(newTaskName);
-  renderTasks(taskList);
-}
+  function handleAddNewTask() {
+    let newTaskName = window.prompt();
+    taskList.push(newTaskName);
+    renderTasks(taskList);
+  }
 
-function handleDeleteTask() {}
+  function handleDeleteTask() {}
 
-const taskListEl = document.querySelector(".task-list");
+  const taskListEl = document.querySelector(".task-list");
 
-function renderTasks(array) {
-  taskListEl.innerHTML = "";
-  for (let i = 0; i < array.length; i++) {
-    taskListEl.appendChild(createTask(array[i]));
+  function renderTasks(array) {
+    taskListEl.innerHTML = "";
+    for (let i = 0; i < array.length; i++) {
+      taskListEl.appendChild(createTask(array[i]));
+    }
   }
 }
 
