@@ -99,7 +99,7 @@ function nextTask() {
   // Reset the currentTime variable to the time in this moment
   currentTime = Date.now();
   // Reset the task name time element to 0
-  currentTaskNameTime.innerHTML = 0;
+  currentTaskNameTime.innerHTML = "0s";
 
   // -- Check if this is the last task
   if (counter < taskList.length - 2) {
