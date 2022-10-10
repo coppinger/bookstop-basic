@@ -63,6 +63,8 @@ function updateCurrentTaskTime() {
   // Refactor this so it isn't using ceil
   const secondsElapsed = Math.round((Date.now() - currentTime) / 1000);
   currentTaskNameTime.innerHTML = formatTime(secondsElapsed);
+  console.log("tick");
+  console.log((Date.now() - currentTime) / 1000);
 }
 
 let interval = "";
@@ -208,7 +210,7 @@ function finishedRender() {
     ? (percentChangeHolderElem.classList.add("text-green-500"),
       (percentChangeDescriptorElem.innerHTML = " faster"))
     : (percentChangeHolderElem.classList.add("text-red-500"),
-      (percentChangeDescriptorElem.innerHTML = "slower"));
+      (percentChangeDescriptorElem.innerHTML = " slower"));
   // percentChangeDescriptorElem
 
   /*------------------ DIVISION -----------------*/
