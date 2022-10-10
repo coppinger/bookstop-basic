@@ -32,7 +32,7 @@ const buttonElem = document.querySelector(".button");
 
 let counter = 0;
 
-let totalTime = 5000;
+let totalTime = 0;
 
 // Convert seconds to a timestamp (6006s -> 10m : 6s)
 
@@ -61,7 +61,7 @@ let currentTime = Date.now();
 // Update the current task time every second
 function updateCurrentTaskTime() {
   // Refactor this so it isn't using ceil
-  const secondsElapsed = Math.ceil((Date.now() - currentTime) / 1000);
+  const secondsElapsed = Math.round((Date.now() - currentTime) / 1000);
   currentTaskNameTime.innerHTML = formatTime(secondsElapsed);
 }
 
@@ -259,7 +259,7 @@ function formatTime(seconds) {
   return `${
     (hours > 0 ? hours + "h" : "",
     mins > 0 ? mins + "m" : "",
-    secs > 0 ? secs + "s" : "")
+    secs > 0 ? secs + "s" : "0s")
   }`;
 }
 
