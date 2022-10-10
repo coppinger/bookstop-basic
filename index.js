@@ -283,6 +283,47 @@ function calcTaskPercentChange() {
 }
 
 /**------------------------------------------------------------------------
+ *                           C.R.U.D (Cash rules uverything, dude)
+ *------------------------------------------------------------------------**/
+
+function createTask(task) {
+  const fragment = document.createElement("li");
+
+  fragment.innerHTML = `
+    <li class="grid grid-cols-[3fr_1fr_1fr] justify-between gap-2 ">
+      <p class="text-4xl whitespace-nowrap text-ellipsis min-w-0 overflow-hidden">${task}</p>
+      <button class="button-edit-task text-sm font-bold border-2 border-white rounded-full">Edit</button>
+      <button class="button-delete-task text-sm font-bold border-2 border-white rounded-full">Del</button>
+    </li>
+  `;
+
+  console.log(fragment.children);
+
+  return fragment;
+}
+
+const addTaskElem = document.querySelector(".add-task");
+
+addTaskElem.addEventListener("click", handleAddNewTask);
+
+function handleAddNewTask() {
+  let newTaskName = window.prompt();
+  taskList.push(newTaskName);
+  renderTasks(taskList);
+}
+
+function handleDeleteTask() {}
+
+const taskListEl = document.querySelector(".task-list");
+
+function renderTasks(array) {
+  taskListEl.innerHTML = "";
+  for (let i = 0; i < array.length; i++) {
+    taskListEl.appendChild(createTask(array[i]));
+  }
+}
+
+/**------------------------------------------------------------------------
  *                           ON PAGE LOAD
  *------------------------------------------------------------------------**/
 
@@ -290,10 +331,33 @@ function calcTaskPercentChange() {
 function onPageLoad() {
   // -- If on the index page, render the list of tasks to page
   if (currentPath === "/") {
-    let taskListEl = document.querySelector(".task-list");
-    taskList.forEach((task) => {
-      taskListEl.appendChild(document.createElement("p")).innerHTML = task;
-    });
+    renderTasks(taskList);
+
+    // //! WARNING: Delete this!
+
+    // // This was a test run to figure out how to use document fragments :D
+
+    // let testUpdateUl = document.querySelector(".test-update-ul");
+    // let testUpdateBtn = document.querySelector(".test-update-btn");
+
+    // testUpdateBtn.addEventListener("click", testUpdateFunc);
+
+    // let testFragment = document.createDocumentFragment();
+
+    // let testArr = ["Foo", "Bar"];
+
+    // function testUpdateFunc(e) {
+    //   e.preventDefault();
+    //   for (let i = 0; i < testArr.length; i++) {
+    //     const testLi = document.createElement("li");
+    //     testLi.textContent = testArr[i];
+
+    //     testFragment.appendChild(testLi);
+    //   }
+    //   testUpdateUl.appendChild(testFragment);
+    // }
+
+    // //! WARNING: End delete
   }
   // -- If on the on-going page, load the start function
   if (currentPath === "/on-going.html") {
