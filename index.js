@@ -512,13 +512,18 @@ class routineLog {
       (this.finishTime.getTime() - this.startTime.getTime()) / 1000;
 
     // Calculate and set the total percent change vs the most recent routine
-    routineLogList[routineLogList.length - 1].totalTimeComparisonPercent =
-      Math.ceil(
-        percentDiffCalc(
-          routineLogList[routineLogList.length - 2].totalTimeElapsed,
-          routineLogList[routineLogList.length - 1].totalTimeElapsed
-        )
-      );
+    if (routineLogList.length <= 1) {
+      routineLogList[routineLogList.length - 1].totalTimeComparisonPercent =
+        "Calibrating";
+    } else {
+      routineLogList[routineLogList.length - 1].totalTimeComparisonPercent =
+        Math.ceil(
+          percentDiffCalc(
+            routineLogList[routineLogList.length - 2].totalTimeElapsed,
+            routineLogList[routineLogList.length - 1].totalTimeElapsed
+          )
+        );
+    }
   }
 
   // -- 2. Calculate total totalTimeComparisonPercent
