@@ -493,8 +493,8 @@ class routineLog {
 
   finishTask() {
     let thisTask = this.tasks.length - 1;
-    let prevRoutineThisTask =
-      routineLogList[routineLogList.length - 2].tasks[this.tasks.length - 1];
+    // let prevRoutineThisTask =
+    //   routineLogList[routineLogList.length - 2].tasks[this.tasks.length - 1];
     let tasksArray = this.tasks;
 
     tasksArray[thisTask].taskEndDate = new Date();
