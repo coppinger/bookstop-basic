@@ -1,18 +1,10 @@
 let currentPath = window.location.pathname;
 
-let taskList = [
-  "Run",
-  "Workout",
-  "Shower",
-  "Dress",
-  "Make bed",
-  "Breakfast",
-  "Brush teeth",
-];
-
 // If there is no routineLogList array saved in local storage, then create it, otherwise load whatever is in local storage
 window.routineLogList =
   JSON.parse(localStorage.getItem("routineLogList")) || [];
+
+window.taskList = JSON.parse(localStorage.getItem("taskList")) || [];
 
 // localStorage.setItem("routineLogList", "yeet");
 
@@ -305,6 +297,7 @@ function handleUpdateTask(e) {
 
   taskList[thisTaskIndexPos] = updatedTaskName;
   renderTasks(taskList);
+  window.localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
 function handleDeleteTask(e) {
@@ -314,6 +307,7 @@ function handleDeleteTask(e) {
 
   taskList.splice(deleteingTaskId, 1);
   renderTasks(taskList);
+  window.localStorage.setItem("taskList", JSON.stringify(taskList));
 }
 
 if (currentPath === "/") {
@@ -351,6 +345,7 @@ if (currentPath === "/") {
 
     taskList.push(newTaskName);
     renderTasks(taskList);
+    window.localStorage.setItem("taskList", JSON.stringify(taskList));
   }
 
   const taskListEl = document.querySelector(".task-list");
@@ -372,6 +367,11 @@ function onPageLoad() {
   // -- If on the index page, render the list of tasks to page
   if (currentPath === "/") {
     renderTasks(taskList);
+
+    const startButton = document.querySelector(".button");
+    startButton.addEventListener("click", () => {
+      window.localStorage.setItem("taskList", JSON.stringify(taskList));
+    });
 
     // //! WARNING: Delete this!
 
