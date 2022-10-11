@@ -184,7 +184,8 @@ function finishedRender() {
 
   totalDuration.innerHTML = formatTime(currentRoutineLog.totalTimeElapsed);
 
-  previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
+  if (routineLogList.length > 1)
+    previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
 
   /*------------------ DIVISION -----------------*/
 
@@ -426,7 +427,7 @@ function onPageLoad() {
       window.location.href = "./";
     });
 
-    calcTaskPercentChange();
+    if (routineLogList.length > 1) calcTaskPercentChange();
     finishedRender();
   }
 }
