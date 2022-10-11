@@ -287,20 +287,32 @@ function calcTaskPercentChange() {
  *------------------------------------------------------------------------**/
 
 function handleUpdateTask(e) {
-  let updatingTaskName = e.path[1].querySelector(".task-p");
-  let updatedTaskName = window.prompt(
+  // let updatingTaskName = e.path[1].querySelector(".task-p");
+  let updatingTaskName = e.target.parentElement.querySelector(".task-p");
+
+  let updatedTaskName = "";
+
+  updatedTaskName = window.prompt(
     `Enter the new task name for '${updatingTaskName.innerText}'`
   );
+
+  if (updatedTaskName === "") {
+    window.alert("You didn't enter anything for the new task name :(");
+    return;
+  }
+
   thisTaskIndexPos = updatingTaskName.id.charAt(updatingTaskName.id.length - 1);
+
   taskList[thisTaskIndexPos] = updatedTaskName;
   renderTasks(taskList);
 }
 
 function handleDeleteTask(e) {
-  console.log(`Before: ${taskList}`);
-  let deleteingTaskId = e.path[1]
+  let deleteingTaskId = e.target.parentElement
     .querySelector(".task-p")
-    .id.charAt(e.path[1].querySelector(".task-p").id.length - 1);
+    .id.charAt(e.target.parentElement.querySelector(".task-p").id.length - 1);
+
+  taskList.splice(deleteingTaskId, 1);
   renderTasks(taskList);
 }
 
@@ -326,9 +338,17 @@ if (currentPath === "/") {
   addTaskElem.addEventListener("click", handleAddNewTask);
 
   function handleAddNewTask() {
-    let newTaskName = window.prompt(
+    let newTaskName = "";
+
+    newTaskName = window.prompt(
       "Enter a name for the new task you want to add"
     );
+
+    if (newTaskName === "") {
+      window.alert("You didn't put in a task name :(");
+      return;
+    }
+
     taskList.push(newTaskName);
     renderTasks(taskList);
   }
