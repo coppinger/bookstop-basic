@@ -1,5 +1,7 @@
 let currentPath = window.location.pathname;
 
+const taskListEl = document.querySelector(".task-list");
+
 // If there is no routineLogList array saved in local storage, then create it, otherwise load whatever is in local storage
 window.routineLogList =
   JSON.parse(localStorage.getItem("routineLogList")) || [];
@@ -347,8 +349,6 @@ if (currentPath === "/") {
     renderTasks(taskList);
     window.localStorage.setItem("taskList", JSON.stringify(taskList));
   }
-
-  const taskListEl = document.querySelector(".task-list");
 
   function renderTasks(array) {
     taskListEl.innerHTML = "";
