@@ -291,6 +291,8 @@ function handleUpdateTask(e) {
     `Enter the new task name for '${updatingTaskName.innerText}'`
   );
 
+  if (updatedTaskName === null) return;
+
   if (updatedTaskName === "") {
     window.alert("You didn't enter anything for the new task name :(");
     return;
@@ -340,6 +342,8 @@ if (currentPath === "/") {
     newTaskName = window.prompt(
       "Enter a name for the new task you want to add"
     );
+
+    if (newTaskName === null) return;
 
     if (newTaskName === "") {
       window.alert("You didn't put in a task name :(");
