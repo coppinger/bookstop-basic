@@ -182,10 +182,12 @@ function finishedRender() {
   let totalDuration = document.querySelector(".total-duration");
   let previousDuration = document.querySelector(".previous-duration");
 
+  console.log(currentRoutineLog.totalTimeElapsed);
+  console.log(formatTime(100));
   totalDuration.innerHTML = formatTime(currentRoutineLog.totalTimeElapsed);
 
-  if (routineLogList.length > 1)
-    previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
+  // if (routineLogList.length > 1)
+  //   previousDuration.innerHTML = formatTime(prevRoutineLog.totalTimeElapsed);
 
   /*------------------ DIVISION -----------------*/
 
@@ -251,14 +253,19 @@ function finishedRender() {
 
 function formatTime(seconds) {
   let secs = Math.floor(seconds % 60);
+  console.log(secs);
   let mins = Math.floor((seconds / 60) % 60);
+  console.log(mins);
   let hours = Math.floor(seconds / 60 / 60);
-  return `${
-    (hours > 0 ? hours + "h" : "",
-    mins > 0 ? mins + "m" : "",
-    secs > 0 ? secs + "s" : "0s")
+  console.log(hours);
+  return `${hours > 0 ? hours + "h " : ""}${mins > 0 ? mins + "m " : ""}${
+    secs > 0 ? secs + "s" : ""
   }`;
 }
+
+console.log("---");
+console.log(formatTime(6006));
+console.log("---");
 
 // -- At the end of the task, save the time elapsed to the task array
 
